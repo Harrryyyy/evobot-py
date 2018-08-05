@@ -22,7 +22,7 @@ async def on_ready():
 async def on_member_join(member):
     if member.server.id == "474988884426752013":
         channel = client.get_channel("475018157405241355")
-        await client.send_message(channel, f"<:xx:475004317330309120>: Welcome {member.mention} To *Evolutionary!* Our goal is to support people new to coding languages & help them with whatever they need!*")
+        await client.send_message(channel, f"<:check:475014209718190083>: Welcome {member.mention} To *Evolutionary!* Our goal is to support people new to coding languages & help them with whatever they need!*")
         role = discord.utils.get(member.server.roles, name='Members')
         await client.add_roles(member, role)
 
@@ -75,13 +75,13 @@ async def rank(ctx,member: discord.Member, rank: str):
 @commands.has_role("Mod")
 async def kick(ctx, userName: discord.Member, *, reason: str):
     await client.kick(userName)
-    await client.say(":white_check_mark: Member ``{}`` successfully kicked for **{}** ".format(userName, reason))
+    await client.say("<:check:475014209718190083> Member ``{}`` successfully kicked for **{}** ".format(userName, reason))
 
 @client.command(pass_context=True)
 @commands.has_role("Mod")
 async def ban(ctx, userName: discord.Member, *, reason: str):
     await client.ban(userName)
-    await client.say(":white_check_mark: Member ``{}`` successfully banned for **{}** ".format(userName, reason))
+    await client.say("<:check:475014209718190083> Member ``{}`` successfully banned for **{}** ".format(userName, reason))
 
 @client.command(pass_context=True)
 @commands.has_role("Mod")
@@ -91,14 +91,14 @@ async def mute(ctx, member: discord.Member, *, reason: str):
         await client.create_role(member.server, 'Muted')
     else:
         await client.add_roles(member, mute_role)
-        await client.say(f':white_check_mark: Member ``{member}`` successfully muted for **{reason}**')
+        await client.say(f'<:check:475014209718190083> Member ``{member}`` successfully muted for **{reason}**')
 
 @client.command()
 @commands.has_role("Management")
 async def unmute(member: discord.Member):
     mute_role = discord.utils.get(member.server.roles, name='Muted')
     await client.remove_roles(member, mute_role)
-    await client.say(f":white_check_mark: Member ``{member}`` successfully unmuted.")
+    await client.say(f"<:check:475014209718190083> Member ``{member}`` successfully unmuted.")
 
 
 
