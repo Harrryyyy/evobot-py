@@ -93,12 +93,12 @@ async def mute(ctx, member: discord.Member, *, reason: str):
         await client.add_roles(member, mute_role)
         await client.say(f':white_check_mark: Member ``{member}`` successfully muted for **{reason}**')
 
-@client.command(pass_context=True)
+@client.command()
 @commands.has_role("Management")
-async def unmute(ctx, member: discord.Member):
+async def unmute(member: discord.Member):
     mute_role = discord.utils.get(member.server.roles, name='Muted')
     await client.remove_roles(member, mute_role)
-    await client.send_message(message.channel, ":white_check_mark: Member ``{member}`` successfully unmuted.")
+    await client.say(":white_check_mark: Member ``{member}`` successfully unmuted.")
 
 
 
