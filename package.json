@@ -1,0 +1,12 @@
+{
+    "name": "EvoBot",
+    "description": "EvoBot made with python",
+    "version": "1.0.0",
+    "main": "EvoBot V1.py",
+    "scripts": {
+        "start": "python EvoBot V1.py"
+    },
+    "dependencies": {
+        "discord.py": "0.16.12"
+    }
+}
