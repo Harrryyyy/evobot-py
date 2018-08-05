@@ -69,7 +69,7 @@ async def rank(ctx,member: discord.Member, rank: str):
     if rank == "W.I.P":
         role = discord.utils.get(member.server.roles, name='W.I.P')
         await client.add_roles(member, role)
-        return await client.say(f'Successfully ranked user ``{member}`` to **{role}**')
+        return await client.say(f'<:check:475014209718190083> Successfully ranked user ``{member}`` to **{role}**')
     
 @client.command(pass_context=True)
 @commands.has_role("Mod")
