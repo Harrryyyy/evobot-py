@@ -1,1 +1,1 @@
-worker: python EvoBot V1.py
+worker: python EvoBot.py
