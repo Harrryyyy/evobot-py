@@ -98,7 +98,7 @@ async def mute(ctx, member: discord.Member, *, reason: str):
 async def unmute(member: discord.Member):
     mute_role = discord.utils.get(member.server.roles, name='Muted')
     await client.remove_roles(member, mute_role)
-    await client.say(":white_check_mark: Member ``{member}`` successfully unmuted.")
+    await client.say(f":white_check_mark: Member ``{member}`` successfully unmuted.")
 
 
 
