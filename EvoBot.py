@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from discord.ext.commands import BucketType
 import asyncio
 import time
 import random
@@ -103,5 +104,18 @@ async def unmute(member: discord.Member):
 @client.event
 async def on_command_error(error, ctx):
     await client.send_message(ctx.message.channel, f'<:xx:475004317330309120> You do not have access to that command.')
+    
+@client.event
+@commands.cooldown(2, 3, commands.BucketType.user)
+async def on_message(message):
+    await client.process_commands(message)
 
+@client.event
+async def on_command_error(error, ctx):
+    if isinstance(error, commands.OnCommandCooldown):
+        message = await client.send_message(ctx.message.channel, f"Please try to avoid spamming, {ctx.message.author.mention}.")
+        await asyncio.sleep(3)
+        await client.delete_message(message)
+
+    
 client.run("NDc1MDEyMTI3OTM0MTE5OTQ3.DkY5XA.u69rTAwBa9lwp-pw9rxigAxDF6M")
