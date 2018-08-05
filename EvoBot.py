@@ -100,6 +100,8 @@ async def unmute(member: discord.Member):
     await client.remove_roles(member, mute_role)
     await client.say(f"<:check:475014209718190083> Member ``{member}`` successfully unmuted.")
 
-
+@client.event
+async def on_command_error(error, ctx):
+    await cient.say(f'<:xx:475004317330309120> You do not have access to that command.' {ctx.message.author.mention}')
 
 client.run("NDc1MDEyMTI3OTM0MTE5OTQ3.DkY5XA.u69rTAwBa9lwp-pw9rxigAxDF6M")
