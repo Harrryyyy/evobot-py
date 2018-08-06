@@ -50,7 +50,7 @@ async def clear(ctx, amount=100):
 
 @client.command(pass_context=True)
 @commands.has_role("Management")
-async def rank(ctx,member: discord.Member, rank: str):
+async def rank(ctx, member: discord.Member, rank: str):
     if rank == "Developers":
         role = discord.utils.get(member.server.roles, name='Developers')
         await client.add_roles(member, role)
@@ -104,6 +104,11 @@ async def unmute(member: discord.Member):
     mute_role = discord.utils.get(member.server.roles, name='Muted')
     await client.remove_roles(member, mute_role)
     await client.say(f"**✓** | Member ``{member}`` successfully unmuted.")
+    
+@client.event(pass_context=True)
+async def unban(ctx, user):
+    user = client.get_user_info(USERID)
+    await client.unban(ctx.message.server, user) 
 
 @client.event
 async def on_command_error(error, ctx):
