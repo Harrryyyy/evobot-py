@@ -17,7 +17,7 @@ async def on_ready():
     print("Bot successfully booted & online.")
     print("My name is " + client.user.name)
     print("My ID is " + client.user.id)
-    await client.change_presence(game=discord.Game(type=2,name='EvoBot | ($)'))
+    await client.change_presence(game=discord.Game(type=2,name='EvoBot | W.I.P'))
 
 @client.event
 async def on_member_join(member):
