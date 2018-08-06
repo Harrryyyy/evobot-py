@@ -119,8 +119,8 @@ async def on_command_error(ctx, error):
     if isinstance(error, commands.CheckFailure):
         await client.send_message(ctx.message.channel, f'✘ | You do not have access to that command.')
         return
-print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
-traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
+    print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
+    traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
 
    
     
