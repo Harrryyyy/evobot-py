@@ -105,7 +105,7 @@ async def unmute(member: discord.Member):
     await client.remove_roles(member, mute_role)
     await client.say(f"**✓** | Member ``{member}`` successfully unmuted.")
     
-@client.event(pass_context=True)
+@client.command(pass_context=True)
 async def unban(ctx, user):
     user = client.get_user_info(USERID)
     await client.unban(ctx.message.server, user) 
