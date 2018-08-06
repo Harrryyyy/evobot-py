@@ -112,8 +112,8 @@ async def unban(ctx, user):
     await client.unban(ctx.message.server, user) 
     await client.say(f"**✓** | Userid ``{user.name}`` successfully unbanned.")
 
-@client.event(pass_context=True)
-async def on_command_error(self, error: Exception, ctx: commands.Context):
+@client.event
+async def on_command_error(error: Exception, ctx: commands.Context):
     if isinstance(error, commands.CommandNotFound):
         return
     if isinstance(error, commands.CheckFailure):
