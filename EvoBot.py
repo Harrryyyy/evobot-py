@@ -106,11 +106,13 @@ async def unmute(member: discord.Member):
     await client.say(f"**✓** | Member ``{member}`` successfully unmuted.")
     
 @client.command(pass_context=True)
+@commands.has_role("Management")
 async def unban(ctx, user):
     user = client.get_user_info(USERID)
     await client.unban(ctx.message.server, user) 
+    await client.say(f"**✓** | Userid ``{USERID}`` successfully unbanned.")
 
-@client.event
+    @client.event
 async def on_command_error(error, ctx):
     await client.send_message(ctx.message.channel, f'✘ | You do not have access to that command.')
    
