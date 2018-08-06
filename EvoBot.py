@@ -112,7 +112,7 @@ async def unban(ctx, user):
     await client.unban(ctx.message.server, user) 
     await client.say(f"**✓** | Userid ``{user.name}`` successfully unbanned.")
 
-    @client.event
+@client.event
 async def on_command_error(error, ctx):
     await client.send_message(ctx.message.channel, f'✘ | You do not have access to that command.')
    
