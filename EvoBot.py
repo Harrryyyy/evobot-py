@@ -46,7 +46,7 @@ async def ping(ctx):
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount=100):
     await client.purge_from(ctx.message.channel, limit=int(amount) + 1)
-    await client.say ('Messages cleared from chat history.')
+    await client.say ('✓ | Messages cleared from chat history.')
 
 @client.command(pass_context=True)
 @commands.has_role("Management")
@@ -74,7 +74,7 @@ async def rank(ctx,member: discord.Member, rank: str):
     if rank == "W.I.P":
         role = discord.utils.get(member.server.roles, name='W.I.P')
         await client.add_roles(member, role)
-        return await client.say(f'Successfully ranked user ``{member}`` to **{role}**')
+        return await client.say(f'✓ | Successfully ranked user ``{member}`` to **{role}**')
     
 @client.command(pass_context=True)
 @commands.has_role("Support")
@@ -107,7 +107,7 @@ async def unmute(member: discord.Member):
 
 @client.event
 async def on_command_error(error, ctx):
-    await client.send_message(ctx.message.channel, f'<:xx:475004317330309120> You do not have access to that command.')
+    await client.send_message(ctx.message.channel, f'✘ | You do not have access to that command.')
    
     
 client.run("NDc1MDEyMTI3OTM0MTE5OTQ3.DkY5XA.u69rTAwBa9lwp-pw9rxigAxDF6M")
