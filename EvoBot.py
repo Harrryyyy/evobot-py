@@ -110,7 +110,7 @@ async def unmute(member: discord.Member):
 async def unban(ctx, user):
     user = client.get_user_info(USERID)
     await client.unban(ctx.message.server, user) 
-    await client.say(f"**✓** | Userid ``{USERID}`` successfully unbanned.")
+    await client.say(f"**✓** | Userid ``{user.name}`` successfully unbanned.")
 
     @client.event
 async def on_command_error(error, ctx):
