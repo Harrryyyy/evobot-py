@@ -46,7 +46,7 @@ async def ping(ctx):
 @commands.has_permissions(manage_messages=True)
 async def clear(ctx, amount=100):
     await client.purge_from(ctx.message.channel, limit=int(amount) + 1)
-    await client.say ('✓ | Messages cleared from chat history.')
+    await client.say ('**✓** | Messages cleared from chat history.')
 
 @client.command(pass_context=True)
 @commands.has_role("Management")
@@ -74,19 +74,19 @@ async def rank(ctx,member: discord.Member, rank: str):
     if rank == "W.I.P":
         role = discord.utils.get(member.server.roles, name='W.I.P')
         await client.add_roles(member, role)
-        return await client.say(f'✓ | Successfully ranked user ``{member}`` to **{role}**')
+        return await client.say(f'**✓** | Successfully ranked user ``{member}`` to **{role}**')
     
 @client.command(pass_context=True)
 @commands.has_role("Support")
 async def kick(ctx, userName: discord.Member, *, reason: str):
     await client.kick(userName)
-    await client.say("✓ | Member ``{}`` successfully kicked for **{}** ".format(userName, reason))
+    await client.say("**✓** | Member ``{}`` successfully kicked for **{}** ".format(userName, reason))
 
 @client.command(pass_context=True)
 @commands.has_role("Mod")
 async def ban(ctx, userName: discord.Member, *, reason: str):
     await client.ban(userName)
-    await client.say("✓ | Member ``{}`` successfully banned for **{}** ".format(userName, reason))
+    await client.say("**✓** | Member ``{}`` successfully banned for **{}** ".format(userName, reason))
 
 @client.command(pass_context=True)
 @commands.has_role("Mod")
@@ -96,14 +96,14 @@ async def mute(ctx, member: discord.Member, *, reason: str):
         await client.create_role(member.server, 'Muted')
     else:
         await client.add_roles(member, mute_role)
-        await client.say(f'✓ | Member ``{member}`` successfully muted for **{reason}**')
+        await client.say(f'**✓** | Member ``{member}`` successfully muted for **{reason}**')
 
 @client.command()
 @commands.has_role("Management")
 async def unmute(member: discord.Member):
     mute_role = discord.utils.get(member.server.roles, name='Muted')
     await client.remove_roles(member, mute_role)
-    await client.say(f"✓ | Member ``{member}`` successfully unmuted.")
+    await client.say(f"**✓** | Member ``{member}`` successfully unmuted.")
 
 @client.event
 async def on_command_error(error, ctx):
