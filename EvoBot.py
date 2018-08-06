@@ -113,8 +113,15 @@ async def unban(ctx, user):
     await client.say(f"**✓** | Userid ``{user.name}`` successfully unbanned.")
 
 @client.event
-async def on_command_error(error, ctx):
-    await client.send_message(ctx.message.channel, f'✘ | You do not have access to that command.')
+async def on_command_error(self, error: Exception, ctx: commands.Context):
+    if isinstance(error, commands.CommandNotFound):
+        return
+    if isinstance(error, commands.CheckFailure):
+        await client.send_message(ctx.message.channel, f'✘ | You do not have access to that command.')
+        return
+print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
+traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
+
    
     
 client.run("NDc1MDEyMTI3OTM0MTE5OTQ3.DkY5XA.u69rTAwBa9lwp-pw9rxigAxDF6M")
