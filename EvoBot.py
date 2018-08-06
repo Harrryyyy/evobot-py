@@ -77,7 +77,7 @@ async def rank(ctx,member: discord.Member, rank: str):
         return await client.say(f'Successfully ranked user ``{member}`` to **{role}**')
     
 @client.command(pass_context=True)
-@commands.has_role("Mod")
+@commands.has_role("Support")
 async def kick(ctx, userName: discord.Member, *, reason: str):
     await client.kick(userName)
     await client.say("Member ``{}`` successfully kicked for **{}** ".format(userName, reason))
