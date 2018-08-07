@@ -44,7 +44,7 @@ async def rank(ctx, member: discord.User, rank):
         role = discord.utils.get(member.server.roles, name='Support')
         await bot.add_roles(member, role)
         embed = discord.Embed(title="fUser {member}", description=f"has successfully been ranked to {rank}.", color=0x646666)
-    await bot.send_message(member, embed=embed)
+        await bot.send_message(member, embed=embed)
     
 @bot.event
 async def on_member_join(member):
