@@ -22,30 +22,6 @@ async def echo(ctx, *, args):
     await bot.say(args)
     await bot.delete_message(ctx.message)
     
-@bot.command
-@commands.has_role("Management")
-async def rank(ctx, member: discord.User, rank):
-    if rank == "Developers":
-        role = discord.utils.get(member.server.roles, name='Developers')
-        await bot.add_roles(member, role)
-    if rank == "Coders":
-        role = discord.utils.get(member.server.roles, name='Coders')
-        await bot.add_roles(member, role)
-    if rank == "Mod":
-        role = discord.utils.get(member.server.roles, name='Mod')
-        await bot.add_roles(member, role)
-    if rank == "Partners":
-        role = discord.utils.get(member.server.roles, name='Partners')
-        await bot.add_roles(member, role)
-    if rank == "W.I.P":
-        role = discord.utils.get(member.server.roles, name='W.I.P')
-        await bot.add_roles(member, role)
-    if rank == "Support":
-        role = discord.utils.get(member.server.roles, name='Support')
-        await bot.add_roles(member, role)
-        embed = discord.Embed(title=f"User {member}", description=f"has successfully been ranked.", color=0x646666)
-        await bot.say(embed=embed)
-    
 @bot.event
 async def on_member_join(member):
     embed = discord.Embed(title="Welcome!", description=f"Welcome, {member.mention} to Evolutionary!", color=0x646666)
@@ -98,6 +74,15 @@ async def on_member_join(member):
         await bot.send_message(channel, embed=embed)
         role = discord.utils.get(member.server.roles, name='Members')
         await bot.add_roles(member, role)
+@bot.event
+async def on_command_error(ctx, error):
+    if isinstance(error, commands.CommandNotFound):
+        return
+    if isinstance(error, commands.CheckFailure):
+        await client.send_message(ctx.message.channel, f'✘ | You do not have access to that command.')
+        return
+    print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
+    traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
 
    
 bot.run("NDc1MDEyMTI3OTM0MTE5OTQ3.DkY5XA.u69rTAwBa9lwp-pw9rxigAxDF6M")
