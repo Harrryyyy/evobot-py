@@ -8,8 +8,8 @@ import sys
 import traceback
 import json
 
-Bot = discord.Bot()
 bot = commands.Bot(command_prefix = "$")
+bot.remove_command('help')
 
 @bot.event
 async def on_ready():
