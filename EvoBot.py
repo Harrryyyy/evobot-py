@@ -116,6 +116,11 @@ async def unban(ctx, user):
 async def contribute():
         embed = discord.Embed(title="By donating, you help to keep the bot run 24/7 and help fund future updates!", description="[**Click here** to grab the donation link!](https://paypal.me/HarryOliver240)", color=0x00ff00)
         await client.say(embed=embed)
+        
+@client.command()
+async def donate():
+        embed = discord.Embed(title="By donating, you help to keep the bot run 24/7 and help fund future updates!", description="[**Click here** to grab the donation link!](https://paypal.me/HarryOliver240)", color=0x00ff00)
+        await client.say(embed=embed)
     
 @client.event
 async def on_command_error(ctx, error):
