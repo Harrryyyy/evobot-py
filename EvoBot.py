@@ -40,7 +40,7 @@ async def rank(ctx, member: discord.User, rank):
     if rank == "W.I.P":
         role = discord.utils.get(member.server.roles, name='W.I.P')
         await bot.add_roles(member, role)
-        if rank == "Support":
+    if rank == "Support":
         role = discord.utils.get(member.server.roles, name='Support')
         await bot.add_roles(member, role)
         embed = discord.Embed(title="fUser {member}", description=f"has successfully been ranked to {rank}.", color=0x646666)
