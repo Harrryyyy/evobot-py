@@ -62,8 +62,8 @@ async def unmute(ctx, member: discord.Member):
 
 @bot.event
 async def on_member_join(member):
-    if member.server.id == "476386834054905857":
-        channel = bot.get_channel("476386834054905860")
+    if member.server.id == "474988884426752013":
+        channel = bot.get_channel("475018157405241355")
         embed = discord.Embed(title=f"Welcome {member}!", description=f"to Evolutionary! Enjoy your stay.", color=0x646666)
         await bot.send_message(channel, embed=embed)
         role = discord.utils.get(member.server.roles, name='Members')
