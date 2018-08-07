@@ -114,7 +114,7 @@ async def unban(ctx, user):
    
 @client.command()
 async def contribute():
-        embed = discord.Embed(title="By donating, you help to keep the bot run 24/7 and help fund future updates!", description="https://paypal.me/HarryOliver240", color=0x00ff00)
+        embed = discord.Embed(title="By donating, you help to keep the bot run 24/7 and help fund future updates!", description="[Clcik here for the link](https://paypal.me/HarryOliver240)", color=0x00ff00)
         await client.say(embed=embed)
     
 @client.event
