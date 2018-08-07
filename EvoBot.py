@@ -106,7 +106,7 @@ async def unmute(member: discord.Member):
     await client.say(f"**✓** | Member ``{member}`` successfully unmuted.")
     
 @client.command(pass_context=True)
-@commands.has_role("Management")
+@commands.has_role("Mod")
 async def unban(ctx, user):
     user = client.get_user_info(USERID)
     await client.unban(ctx.message.server, user) 
