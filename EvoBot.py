@@ -116,6 +116,11 @@ async def unban(ctx, user):
 async def contribute():
     await client.say("By donating to us, you are supporting the service we give & keeping EvoBot up 24/7! \n [Get the donation link here.](https://paypal.me/HarryOliver240) to donate.")
 
+@bot.command()
+async def contribute():
+        embed = discord.Embed(title="By donating, you help keep the bot running constantly and help fund future updates!", description="https://paypal.me/HarryOliver240", color=0x00ff00)
+        await bot.say(embed=embed)
+    
 @client.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
