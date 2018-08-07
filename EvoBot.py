@@ -10,7 +10,6 @@ import json
 
 Bot = discord.Bot()
 bot = commands.Bot(command_prefix = "$")
-bot.remove_command('help')
 
 @bot.event
 async def on_ready():
@@ -49,7 +48,7 @@ async def clear(ctx, amount=100):
     await bot.purge_from(ctx.message.channel, limit=int(amount) + 1)
     await client.say ('**✓** | Messages cleared from chat history.')
 
-@client.command(pass_context=True)
+@bot.command(pass_context=True)
 @commands.has_role("Management")
 async def rank(ctx, member: discord.Member, rank: str):
     if rank == "Developers":
@@ -108,7 +107,6 @@ async def mute(ctx, userName: discord.Member, *, reason: str):
         embed = discord.Embed(title="", description=f"User {userName} has successfully been muted.", color=0x646666)
         await bot.say(embed=embed)
 
-
 @bot.command(pass_context=True)
 async def unmute(ctx, member: discord.Member):
     if ctx.message.author.server_permissions.kick_members:
@@ -117,17 +115,17 @@ async def unmute(ctx, member: discord.Member):
         embed = discord.Embed(title=f"User {member} has successfully been unmuted.", description="", color=0x646666)
         await bot.say(embed=embed)
       
-@client.command()
+@bot.command()
 async def contribute():
         embed = discord.Embed(title="By donating, you help to keep the bot run 24/7 and help fund future updates!", description="[**Click here** to grab the donation link!](https://paypal.me/HarryOliver240)", color=0x00ff00)
         await client.say(embed=embed)
         
-@client.command()
+@bot.command()
 async def donate():
         embed = discord.Embed(title="By donating, you help to keep the bot run 24/7 and help fund future updates!", description="[**Click here** to grab the donation link!](https://paypal.me/HarryOliver240)", color=0x00ff00)
         await client.say(embed=embed)
     
-@client.event
+@bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         return
