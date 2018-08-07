@@ -15,21 +15,21 @@ async def on_ready():
 async def help():
     embed = discord.Embed(title="Help page", description="This would be the help list", color=0x646666)
     await bot.say(embed=embed)
-    
+
 @bot.command(pass_context=True)
 @commands.has_role("Mod")
 async def echo(ctx, *, args):
     await bot.say(args)
     await bot.delete_message(ctx.message)
-
+    
 @bot.event
 async def on_member_join(member):
     embed = discord.Embed(title="Welcome!", description=f"Welcome, {member.mention} to Evolutionary!", color=0x646666)
     await bot.send_message(member, embed=embed)
 
 @bot.command(pass_context=True)
-@commands.has_role("Mod")
 async def kick(ctx, userName: discord.Member, *, reason: str):
+    if ctx.message.author.server_permissions.kick_members:
         embed = discord.Embed(title=f"{userName}", description=f"You have been kicked from Evolutionary for {reason}.", color=0x646666)
         await bot.send_message(userName, embed=embed)
         await bot.kick(userName)
@@ -37,8 +37,8 @@ async def kick(ctx, userName: discord.Member, *, reason: str):
         await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
-@commands.has_role("Mod")
 async def ban(ctx, userName: discord.Member, *, reason: str):
+    if ctx.message.author.server_permissions.ban_members:
         embed = discord.Embed(title=f"{userName}", description=f"You have been banned from Evolutionary for {reason}.", color=0x646666)
         await bot.send_message(userName, embed=embed)
         await bot.ban(userName)
@@ -46,8 +46,8 @@ async def ban(ctx, userName: discord.Member, *, reason: str):
         await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
-@commands.has_role("Mod")
 async def mute(ctx, userName: discord.Member, *, reason: str):
+    if ctx.message.author.server_permissions.kick_members:
         mute_role = discord.utils.get(userName.server.roles, name='Muted') 
     if mute_role == None:
         await bot.create_role(member.server, name='Muted')
@@ -59,8 +59,8 @@ async def mute(ctx, userName: discord.Member, *, reason: str):
         await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
-@commands.has_role("Mod")
 async def unmute(ctx, member: discord.Member):
+    if ctx.message.author.server_permissions.kick_members:
         mute_role = discord.utils.get(member.server.roles, name='Muted')
         await bot.remove_roles(member, mute_role)
         embed = discord.Embed(title=f"User {member} has successfully been unmuted.", description="", color=0x646666)
@@ -68,15 +68,12 @@ async def unmute(ctx, member: discord.Member):
 
 @bot.event
 async def on_member_join(member):
-    if member.server.id == "474988884426752013":
-        channel = bot.get_channel("475018157405241355")
+    if member.server.id == "476386834054905857":
+        channel = bot.get_channel("476386834054905860")
         embed = discord.Embed(title=f"Welcome {member}!", description=f"to Evolutionary! Enjoy your stay.", color=0x646666)
         await bot.send_message(channel, embed=embed)
         role = discord.utils.get(member.server.roles, name='Members')
         await bot.add_roles(member, role)
-
-
-
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
