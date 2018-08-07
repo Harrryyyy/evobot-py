@@ -114,7 +114,7 @@ async def unban(ctx, user):
     
 @client.command()
 async def contribute():
-    await client.say("By donating to us, you are supporting the service we give & keeping EvoBot up 24/7! \n [Get the donation link here.]("https://paypal.me/HarryOliver240") to donate.")
+    await client.say("By donating to us, you are supporting the service we give & keeping EvoBot up 24/7! \n [Get the donation link here.](https://paypal.me/HarryOliver240) to donate.")
 
 @client.event
 async def on_command_error(ctx, error):
