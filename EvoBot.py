@@ -98,6 +98,7 @@ async def on_member_join(member):
         await bot.send_message(channel, embed=embed)
         role = discord.utils.get(member.server.roles, name='Members')
         await bot.add_roles(member, role)
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
