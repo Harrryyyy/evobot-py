@@ -22,29 +22,14 @@ async def echo(ctx, *, args):
     await bot.say(args)
     await bot.delete_message(ctx.message)
     
-@bot.command()
-@commands.has_role("Management")
-async def rank(ctx, member: discord.User, rank):
-    if rank == "Developers":
-        role = discord.utils.get(member.server.roles, name='Developers')
-        await bot.add_roles(member, role)
-    if rank == "Coders":
-        role = discord.utils.get(member.server.roles, name='Coders')
-        await bot.add_roles(member, role)
-    if rank == "Mod":
-        role = discord.utils.get(member.server.roles, name='Mod')
-        await bot.add_roles(member, role)
-    if rank == "Partners":
-        role = discord.utils.get(member.server.roles, name='Partners')
-        await bot.add_roles(member, role)
-    if rank == "W.I.P":
-        role = discord.utils.get(member.server.roles, name='W.I.P')
-        await bot.add_roles(member, role)
-    if rank == "Support":
-        role = discord.utils.get(member.server.roles, name='Support')
-        await bot.add_roles(member, role)
-        embed = discord.Embed(title="fUser {member}", description=f"has successfully been ranked to {rank}.", color=0x646666)
-        await bot.say(embed=embed)
+@bot.command(pass_context=True)
+    async def ping(ctx):
+        '''Ping bot'''
+        channel = ctx.message.channel
+        t1 = time.perf_counter()
+        msg = await client.say(":ping_pong: Pong!")
+        t2 = time.perf_counter()
+        await bot.edit_message(msg, ":ping_pong: Pong! `{}ms`".format(round((t2-t1)*1000)))
     
 @bot.event
 async def on_member_join(member):
