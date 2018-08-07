@@ -22,7 +22,7 @@ async def echo(ctx, *, args):
     await bot.say(args)
     await bot.delete_message(ctx.message)
     
-@bot.command
+@bot.command()
 @commands.has_role("Management")
 async def rank(ctx, member: discord.User, rank):
     if rank == "Developers":
@@ -44,7 +44,7 @@ async def rank(ctx, member: discord.User, rank):
         role = discord.utils.get(member.server.roles, name='Support')
         await bot.add_roles(member, role)
         embed = discord.Embed(title="fUser {member}", description=f"has successfully been ranked to {rank}.", color=0x646666)
-        await bot.send_message(member, embed=embed)
+        await bot.say(embed=embed)
     
 @bot.event
 async def on_member_join(member):
