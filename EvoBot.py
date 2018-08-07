@@ -111,11 +111,7 @@ async def unban(ctx, user):
     user = client.get_user_info(USERID)
     await client.unban(ctx.message.server, user) 
     await client.say(f"**✓** | User ``{user.name}`` successfully unbanned.")
-    
-@client.command()
-async def contribute():
-    await client.say("By donating to us, you are supporting the service we give & keeping EvoBot up 24/7! \n [Get the donation link here.](https://paypal.me/HarryOliver240) to donate.")
-
+   
 @client.command()
 async def contribute():
         embed = discord.Embed(title="By donating, you help keep the bot running constantly and help fund future updates!", description="https://paypal.me/HarryOliver240", color=0x00ff00)
