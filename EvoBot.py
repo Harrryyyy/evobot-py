@@ -22,17 +22,12 @@ async def echo(ctx, *, args):
     await bot.say(args)
     await bot.delete_message(ctx.message)
     
-@bot.event
-async def on_member_join(member):
-    embed = discord.Embed(title="Welcome!", description=f"Welcome, {member.mention} to Evolutionary!", color=0x646666)
-    await bot.send_message(member, embed=embed)
-    
 @commands.command(pass_context=True)
 async def ping(self,ctx):
         t1=time.perf_counter()
         m=await self.bot.say('pinging...')
         t2=time.perf_counter()
-        await self.bot.edit_message(m, f'Pong! {round((t2-t1)*1000)}ms')
+        await bot.edit_message(m, f'Pong! {round((t2-t1)*1000)}ms')
 
 @bot.command(pass_context=True)
 async def kick(ctx, userName: discord.Member, *, reason: str):
