@@ -19,13 +19,14 @@ async def on_ready():
     print("My ID is " + client.user.id)
     await client.change_presence(game=discord.Game(type=2,name='$help'))
 
-@client.event
+@bot.event
 async def on_member_join(member):
-    if member.server.id == "474988884426752013":
-        channel = client.get_channel("475018157405241355")
-        await client.send_message(channel, f":white_check_mark: Welcome {member.mention} To **Evolutionary**! Our goal is to support people new to coding languages & help them with whatever they need!")
+    if member.server.id == "476386834054905857":
+        channel = bot.get_channel("476386834054905860")
+        embed = discord.Embed(title=f"Welcome {member}!", description=f"to Evolutionary! Enjoy your stay.", color=0x646666)
+        await bot.send_message(channel, embed=embed)
         role = discord.utils.get(member.server.roles, name='Members')
-        await client.add_roles(member, role)
+        await bot.add_roles(member, role)
 
 @client.command(pass_context=True)
 @commands.has_role("Mod")
@@ -76,42 +77,46 @@ async def rank(ctx, member: discord.Member, rank: str):
         await client.add_roles(member, role)
         return await client.say(f'**✓** | Successfully ranked user ``{member}`` to **{role}**')
     
-@client.command(pass_context=True)
-@commands.has_role("Mod")
+@bot.command(pass_context=True)
 async def kick(ctx, userName: discord.Member, *, reason: str):
-    await client.kick(userName)
-    await client.say("**✓** | Member ``{}`` successfully kicked for **{}** ".format(userName, reason))
+    if ctx.message.author.server_permissions.kick_members:
+        embed = discord.Embed(title=f"{userName}", description=f"You have been kicked from Evolutionary for {reason}.", color=0x646666)
+        await bot.send_message(userName, embed=embed)
+        await bot.kick(userName)
+        embed = discord.Embed(title="", description=f"User {userName} has been successfully kicked.", color=0x646666)
+        await bot.say(embed=embed)
 
-@client.command(pass_context=True)
-@commands.has_role("Mod")
+@bot.command(pass_context=True)
 async def ban(ctx, userName: discord.Member, *, reason: str):
-    await client.ban(userName)
-    await client.say("**✓** | Member ``{}`` successfully banned for **{}** ".format(userName, reason))
+    if ctx.message.author.server_permissions.kick_members:
+        embed = discord.Embed(title=f"{userName}", description=f"You have been banned from Evolutionary for {reason}.", color=0x646666)
+        await bot.send_message(userName, embed=embed)
+        await bot.ban(userName)
+        embed = discord.Embed(title="", description=f"User {userName} has been successfully banned.", color=0x646666)
+        await bot.say(embed=embed)
 
-@client.command(pass_context=True)
-@commands.has_role("Mod")
-async def mute(ctx, member: discord.Member, *, reason: str):
-    mute_role = discord.utils.get(member.server.roles, name='Muted') 
+@bot.command(pass_context=True)
+async def mute(ctx, userName: discord.Member, *, reason: str):
+    if ctx.message.author.server_permissions.kick_members:
+        mute_role = discord.utils.get(userName.server.roles, name='Muted') 
     if mute_role == None:
-        await client.create_role(member.server, 'Muted')
+        await bot.create_role(member.server, name='Muted')
     else:
-        await client.add_roles(member, mute_role)
-        await client.say(f'**✓** | Member ``{member}`` successfully muted for **{reason}**')
+        embed = discord.Embed(title=f"{userName}", description=f"You have been muted on Evolutionary for {reason}.", color=0x646666)
+        await bot.send_message(userName, embed=embed)
+        await bot.add_roles(userName, mute_role)
+        embed = discord.Embed(title="", description=f"User {userName} has successfully been muted.", color=0x646666)
+        await bot.say(embed=embed)
 
-@client.command()
-@commands.has_role("Mod")
-async def unmute(member: discord.Member):
-    mute_role = discord.utils.get(member.server.roles, name='Muted')
-    await client.remove_roles(member, mute_role)
-    await client.say(f"**✓** | Member ``{member}`` successfully unmuted.")
-    
-@client.command(pass_context=True)
-@commands.has_role("Mod")
-async def unban(ctx, user):
-    user = client.get_user_info(USERID)
-    await client.unban(ctx.message.server, user) 
-    await client.say(f"**✓** | User ``{user.name}`` successfully unbanned.")
-   
+
+@bot.command(pass_context=True)
+async def unmute(ctx, member: discord.Member):
+    if ctx.message.author.server_permissions.kick_members:
+        mute_role = discord.utils.get(member.server.roles, name='Muted')
+        await bot.remove_roles(member, mute_role)
+        embed = discord.Embed(title=f"User {member} has successfully been unmuted.", description="", color=0x646666)
+        await bot.say(embed=embed)
+      
 @client.command()
 async def contribute():
         embed = discord.Embed(title="By donating, you help to keep the bot run 24/7 and help fund future updates!", description="[**Click here** to grab the donation link!](https://paypal.me/HarryOliver240)", color=0x00ff00)
