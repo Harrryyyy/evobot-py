@@ -1,12 +1,5 @@
 import discord
 from discord.ext import commands
-from discord.ext.commands import BucketType
-import asyncio
-import time
-import random
-import sys
-import traceback
-import json
 
 bot = commands.Bot(command_prefix = "$")
 bot.remove_command('help')
@@ -18,80 +11,32 @@ async def on_ready():
     print("My ID is " + bot.user.id)
     await bot.change_presence(game=discord.Game(type=2,name='$help'))
 
+@bot.command()
+async def help():
+    embed = discord.Embed(title="Help page", description="This would be the help list", color=0x646666)
+    await bot.say(embed=embed)
+
 @bot.event
 async def on_member_join(member):
-    if member.server.id == "476386834054905857":
-        channel = bot.get_channel("476386834054905860")
-        embed = discord.Embed(title=f"Welcome {member}!", description=f"to Evolutionary! Enjoy your stay.", color=0x646666)
-        await bot.send_message(channel, embed=embed)
-        role = discord.utils.get(member.server.roles, name='Members')
-        await bot.add_roles(member, role)
+    embed = discord.Embed(title="Welcome!", description=f"Welcome, {member.mention} to Evolutionary!", color=0x646666)
+    await bot.send_message(member, embed=embed)
 
-@bot.command(pass_context=True)
-@commands.has_role("Mod")
-async def echo(ctx, *, args):
-    await bot.say(args)
-    await bot.delete_message(ctx.message)
-
-@bot.command(pass_context=True)
-async def ping(ctx):
-        '''Ping bot'''
-        channel = ctx.message.channel
-        t1 = time.perf_counter()
-        msg = await bot.say("Pong!")
-        t2 = time.perf_counter()
-        await bot.edit_message(msg, "Pong! `{}ms`".format(round((t2-t1)*1000)))
-
-@bot.command(pass_context=True)
-@commands.has_permissions(manage_messages=True)
-async def clear(ctx, amount=100):
-    await bot.purge_from(ctx.message.channel, limit=int(amount) + 1)
-    await client.say ('**✓** | Messages cleared from chat history.')
-
-@bot.command(pass_context=True)
-@commands.has_role("Management")
-async def rank(ctx, member: discord.Member, rank: str):
-    if rank == "Developers":
-        role = discord.utils.get(member.server.roles, name='Developers')
-        await bot.add_roles(member, role)
-        return await bot.say(f'Successfully ranked user ``{member}`` to **{role}**')
-    if rank == "Support":
-        role = discord.utils.get(member.server.roles, name='Support')
-        await bot.add_roles(member, role)
-        return await bot.say(f'Successfully ranked user ``{member}`` to **{role}**')
-    if rank == "Coders":
-        role = discord.utils.get(member.server.roles, name='Coders')
-        await bot.add_roles(member, role)
-        return await bot.say(f'Successfully ranked user ``{member}`` to **{role}**')
-    if rank == "Mod":
-        role = discord.utils.get(member.server.roles, name='Mod')
-        await bot.add_roles(member, role)
-        return await bot.say(f'Successfully ranked user ``{member}`` to **{role}**')
-    if rank == "Partners":
-        role = discord.utils.get(member.server.roles, name='Partners')
-        await cbot.add_roles(member, role)
-        return await bot.say(f'Successfully ranked user ``{member}`` to **{role}**')
-    if rank == "W.I.P":
-        role = discord.utils.get(member.server.roles, name='W.I.P')
-        await bot.add_roles(member, role)
-        return await bot.say(f'**✓** | Successfully ranked user ``{member}`` to **{role}**')
-    
 @bot.command(pass_context=True)
 async def kick(ctx, userName: discord.Member, *, reason: str):
     if ctx.message.author.server_permissions.kick_members:
         embed = discord.Embed(title=f"{userName}", description=f"You have been kicked from Evolutionary for {reason}.", color=0x646666)
         await bot.send_message(userName, embed=embed)
         await bot.kick(userName)
-        embed = discord.Embed(title="", description=f"User {userName} has been successfully kicked.", color=0x646666)
+        embed = discord.Embed(title="", description=f"User {userName} has successfully been kicked.", color=0x646666)
         await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
 async def ban(ctx, userName: discord.Member, *, reason: str):
-    if ctx.message.author.server_permissions.kick_members:
+    if ctx.message.author.server_permissions.ban_members:
         embed = discord.Embed(title=f"{userName}", description=f"You have been banned from Evolutionary for {reason}.", color=0x646666)
         await bot.send_message(userName, embed=embed)
         await bot.ban(userName)
-        embed = discord.Embed(title="", description=f"User {userName} has been successfully banned.", color=0x646666)
+        embed = discord.Embed(title="", description=f"User {userName} has successfully been banned.", color=0x646666)
         await bot.say(embed=embed)
 
 @bot.command(pass_context=True)
@@ -114,17 +59,18 @@ async def unmute(ctx, member: discord.Member):
         await bot.remove_roles(member, mute_role)
         embed = discord.Embed(title=f"User {member} has successfully been unmuted.", description="", color=0x646666)
         await bot.say(embed=embed)
-      
-@bot.command()
-async def contribute():
-        embed = discord.Embed(title="By donating, you help to keep the bot run 24/7 and help fund future updates!", description="[**Click here** to grab the donation link!](https://paypal.me/HarryOliver240)", color=0x00ff00)
-        await client.say(embed=embed)
-        
-@bot.command()
-async def donate():
-        embed = discord.Embed(title="By donating, you help to keep the bot run 24/7 and help fund future updates!", description="[**Click here** to grab the donation link!](https://paypal.me/HarryOliver240)", color=0x00ff00)
-        await client.say(embed=embed)
-    
+
+@bot.event
+async def on_member_join(member):
+    if member.server.id == "476386834054905857":
+        channel = bot.get_channel("476386834054905860")
+        embed = discord.Embed(title=f"Welcome {member}!", description=f"to Evolutionary! Enjoy your stay.", color=0x646666)
+        await bot.send_message(channel, embed=embed)
+        role = discord.utils.get(member.server.roles, name='Members')
+        await bot.add_roles(member, role)
+
+
+
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
@@ -136,5 +82,4 @@ async def on_command_error(ctx, error):
     traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
 
    
-    
 bot.run("NDc1MDEyMTI3OTM0MTE5OTQ3.DkY5XA.u69rTAwBa9lwp-pw9rxigAxDF6M")
