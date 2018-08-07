@@ -58,9 +58,6 @@ async def rank(ctx, member: discord.Member, rank: str):
     if rank == "Support":
         role = discord.utils.get(member.server.roles, name='Support')
         await client.add_roles(member, role)
-    if rank == "Bots":
-        role = discord.utils.get(member.server.roles, name='Bots')
-        await client.add_roles(member, role)
         return await client.say(f'Successfully ranked user ``{member}`` to **{role}**')
     if rank == "Coders":
         role = discord.utils.get(member.server.roles, name='Coders')
