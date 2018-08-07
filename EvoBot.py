@@ -23,8 +23,7 @@ async def on_ready():
 async def on_member_join(member):
     if member.server.id == "474988884426752013":
         channel = client.get_channel("475018157405241355")
-        embed = discord.Embed(title="Welcome!", description="Welcome, {member.mention} to Evolutionary!", color=0x00ff00)
-        await client.say(embed=embed)
+        await client.send_message(channel, f":white_check_mark: Welcome {member.mention} To **Evolutionary**! Our goal is to support people new to coding languages & help them with whatever they need!")
         role = discord.utils.get(member.server.roles, name='Members')
         await client.add_roles(member, role)
 
