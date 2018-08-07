@@ -22,15 +22,6 @@ async def echo(ctx, *, args):
     await bot.say(args)
     await bot.delete_message(ctx.message)
     
-@bot.command(pass_context=True)
-    async def ping(ctx):
-        '''Ping bot'''
-        channel = ctx.message.channel
-        t1 = time.perf_counter()
-        msg = await client.say(":ping_pong: Pong!")
-        t2 = time.perf_counter()
-        await bot.edit_message(msg, ":ping_pong: Pong! `{}ms`".format(round((t2-t1)*1000)))
-    
 @bot.event
 async def on_member_join(member):
     embed = discord.Embed(title="Welcome!", description=f"Welcome, {member.mention} to Evolutionary!", color=0x646666)
@@ -84,13 +75,12 @@ async def on_member_join(member):
         role = discord.utils.get(member.server.roles, name='Members')
         await bot.add_roles(member, role)
 
-@bot.event
+        @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.CommandNotFound):
         return
     if isinstance(error, commands.CheckFailure):
-        embed = discord.Embed(title=f"You don't have permission for that.", description="", color=0x646666)
-        await bot.say(embed=embed)
+        await bot.send_message(ctx.message.channel, f'✘ | You do not have access to that command.')
         return
     print('Ignoring exception in command {}:'.format(ctx.command), file=sys.stderr)
     traceback.print_exception(type(error), error, error.__traceback__, file=sys.stderr)
