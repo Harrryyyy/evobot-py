@@ -112,9 +112,9 @@ async def unban(ctx, user):
     await client.unban(ctx.message.server, user) 
     await client.say(f"**✓** | User ``{user.name}`` successfully unbanned.")
     
-@client.command(pass_context=True)
-async def contribute(ctx, args):
-    await client.send_message(message.channel, "By donating any amount larger then $1, you will recieve the Contributer rank! \n**paypal.me/HarryOliver240**")
+@client.command()
+async def contribute():
+    await client.say("By donating any amount larger then $1, you will recieve the Contributer rank! \n**paypal.me/HarryOliver240**")
 
 @client.event
 async def on_command_error(ctx, error):
