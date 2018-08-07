@@ -111,10 +111,12 @@ async def unban(ctx, user):
     user = client.get_user_info(USERID)
     await client.unban(ctx.message.server, user) 
     await client.say(f"**✓** | User ``{user.name}`` successfully unbanned.")
+    embed = discord.Embed(title="By donating, you help to keep the bot run 24/7 and help fund future updates!", description="[**Click here** to grab the donation link!](https://paypal.me/HarryOliver240)", color=0x00ff00)
+        await client.say(embed=embed)
    
 @client.command()
 async def contribute():
-        embed = discord.Embed(title="By donating, you help to keep the bot run 24/7 and help fund future updates!", description="[**Click here** to grab the donation link!](https://paypal.me/HarryOliver240)", color=0x00ff00)
+        embed = discord.Embed(title=f"**✓** | User ``{user.name}`` successfully unbanned.", description="", color=0x00ff00)
         await client.say(embed=embed)
         
 @client.command()
