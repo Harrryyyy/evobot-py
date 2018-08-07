@@ -77,19 +77,19 @@ async def rank(ctx, member: discord.Member, rank: str):
         return await client.say(f'**✓** | Successfully ranked user ``{member}`` to **{role}**')
     
 @client.command(pass_context=True)
-@commands.has_permission(kick_members=True)
+@commands.has_role("Mod")
 async def kick(ctx, userName: discord.Member, *, reason: str):
     await client.kick(userName)
     await client.say("**✓** | Member ``{}`` successfully kicked for **{}** ".format(userName, reason))
 
 @client.command(pass_context=True)
-@commands.has_permission(ban_members=True)
+@commands.has_role("Mod")
 async def ban(ctx, userName: discord.Member, *, reason: str):
     await client.ban(userName)
     await client.say("**✓** | Member ``{}`` successfully banned for **{}** ".format(userName, reason))
 
 @client.command(pass_context=True)
-@commands.has_permission(kick_members=True)
+@commands.has_role("Mod")
 async def mute(ctx, member: discord.Member, *, reason: str):
     mute_role = discord.utils.get(member.server.roles, name='Muted') 
     if mute_role == None:
