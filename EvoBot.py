@@ -99,14 +99,14 @@ async def mute(ctx, member: discord.Member, *, reason: str):
         await client.say(f'**✓** | Member ``{member}`` successfully muted for **{reason}**')
 
 @client.command()
-@commands.has_role("Management")
+@commands.has_role("Mod")
 async def unmute(member: discord.Member):
     mute_role = discord.utils.get(member.server.roles, name='Muted')
     await client.remove_roles(member, mute_role)
     await client.say(f"**✓** | Member ``{member}`` successfully unmuted.")
     
 @client.command(pass_context=True)
-@commands.has_role("Mods")
+@commands.has_role("Mod")
 async def unban(ctx, user):
     user = client.get_user_info(USERID)
     await client.unban(ctx.message.server, user) 
