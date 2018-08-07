@@ -28,7 +28,7 @@ async def on_member_join(member):
     await bot.send_message(member, embed=embed)
     
 @commands.command(pass_context=True)
-    async def ping(self,ctx):
+async def ping(self,ctx):
         t1=time.perf_counter()
         m=await self.bot.say('pinging...')
         t2=time.perf_counter()
