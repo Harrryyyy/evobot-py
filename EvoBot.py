@@ -78,7 +78,7 @@ async def on_member_join(member):
         await bot.add_roles(member, role)
 
 @bot.event
-async def on_command_error(ctx: commands.Context, error):
+async def on_command_error(error, ctx: commands.Context):
     if isinstance(error, commands.CommandNotFound):
         return
     if isinstance(error, commands.CheckFailure):
