@@ -19,7 +19,8 @@ async def help():
 @bot.command(pass_context=True)
 @commands.has_role("Mod")
 async def echo(ctx, *, args):
-    await bot.say(args)
+    embed = discord.Embed(title=f"", description="", color=0x646666)
+    await bot.say(args, embed=embed)
     await bot.delete_message(ctx.message)
     
 @commands.command(pass_context=True)
