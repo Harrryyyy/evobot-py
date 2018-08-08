@@ -23,7 +23,7 @@ async def echo(ctx, *, args):
     await bot.delete_message(ctx.message)
     
 @commands.command(pass_context=True)
-    async def ping(self,ctx):
+async def ping(self,ctx):
         t1=time.perf_counter()
         msg=await self.bot.say(embed=discord.Embed(title='\U0001f3d3 Pinging...',colour=0xFFD700))
         t2=time.perf_counter()
