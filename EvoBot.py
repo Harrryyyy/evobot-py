@@ -22,7 +22,7 @@ async def echo(ctx, *, args):
     await bot.say(args)
     await bot.delete_message(ctx.message)
     
-@commands.command()
+@bot.command()
 async def ping():
         t1=time.perf_counter()
         msg=await bot.say(embed=discord.Embed(title='\U0001f3d3 Pinging...',colour=0xFFD700))
