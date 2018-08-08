@@ -22,10 +22,10 @@ async def echo(ctx, *, args):
     await bot.say(args)
     await bot.delete_message(ctx.message)
     
-@commands.command(pass_context=True)
-async def ping(self,ctx):
+@bot.command()
+async def ping():
         t1=time.perf_counter()
-        m=await self.bot.say('pinging...')
+        m=await bot.say('pinging...')
         t2=time.perf_counter()
         await bot.edit_message(m, f'Pong! {round((t2-t1)*1000)}ms')
 
