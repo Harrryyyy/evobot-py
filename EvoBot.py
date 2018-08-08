@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import time
 
 bot = commands.Bot(command_prefix = "$")
 bot.remove_command('help')
