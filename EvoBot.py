@@ -22,12 +22,12 @@ async def echo(ctx, *, args):
     await bot.say(args)
     await bot.delete_message(ctx.message)
     
-@commands.command(pass_context=True)
-async def ping(self,ctx):
+@commands.command()
+async def ping():
         t1=time.perf_counter()
-        msg=await self.bot.say(embed=discord.Embed(title='\U0001f3d3 Pinging...',colour=0xFFD700))
+        msg=await bot.say(embed=discord.Embed(title='\U0001f3d3 Pinging...',colour=0xFFD700))
         t2=time.perf_counter()
-        await self.bot.edit_message(msg, embed=discord.Embed(title='\U0001f3d3 Pong!',description=f'**{round((t2-t1)*1000)}** milliseconds',colour=discord.Colour.green()))
+        await bot.edit_message(msg, embed=discord.Embed(title='\U0001f3d3 Pong!',description=f'**{round((t2-t1)*1000)}** milliseconds',colour=discord.Colour.green()))
 
 @bot.command(pass_context=True)
 async def kick(ctx, userName: discord.Member, *, reason: str):
