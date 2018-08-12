@@ -17,6 +17,11 @@ async def help():
     embed = discord.Embed(title="Help page", description="This would be the help list", color=0x646666)
     await bot.say(embed=embed)
 
+@bot.event
+async def on_member_join(member):
+    role = discord.utils.get(member.server.roles, name='Members')
+    await bot.add_roles(member, role)
+    
 @bot.command(pass_context=True)
 @commands.has_role("Mod")
 async def echo(ctx, *, args):
