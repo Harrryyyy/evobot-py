@@ -107,4 +107,4 @@ async def unmute(ctx, member: discord.Member):
 
 
 
-bot.run("NDgzNTk4Njc4NjI0MzA1MTUy.DmVyGw.bqljAGA729-cDJ6d-f_oINXjfN8")
+bot.run("NDgzNjAwMTg0NjE4NTE2NTEw.DmVzcA.ytVRVAGdge938Y0Fe-3YmUxm3JQ")
