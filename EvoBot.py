@@ -29,11 +29,10 @@ async def echo(ctx, *, args):
     await bot.say(args)
     await bot.delete_message(ctx.message)
 
-@bot.command()
-async def changesubject():
-    subject = ['Minecraft', 'Life', 'Sandwiches', 'Computers', 'Weather', 'Sleep,', 'Sports', 'Music', 'Movies', 'Food', 'TV Shows', 'Hobbies', 'Pet']
-    embed = discord.Embed(title="", description=f"Subject successfully changed. New subject is **{random.choice(subject)}**", color=0x646666)
-    await bot.say(embed=embed)
+@bot.command(pass_context=True)
+async def changesubject(ctx, *, args):
+    embed = discord.Embed(title="", description=f"Subject successfully changed. New subject is **{args}**", color=0x646666)
+    await bot.say(args, embed=embed)
     
     
 @bot.command()
