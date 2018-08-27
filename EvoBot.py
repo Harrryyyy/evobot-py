@@ -32,7 +32,7 @@ async def echo(ctx, *, args):
 @bot.command(pass_context=True)
 async def changesubject(ctx, *, args):
     embed = discord.Embed(title="", description=f"Subject successfully changed. New subject is **{args}**", color=0x646666)
-    await bot.say(args, embed=embed)
+    await bot.say(embed=embed)
     
     
 @bot.command()
