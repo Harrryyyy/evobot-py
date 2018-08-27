@@ -32,7 +32,7 @@ async def echo(ctx, *, args):
 @bot.command()
 async def changesubject():
     subject = ['Minecraft', 'Life', 'Sandwiches', 'Computers', 'Weather', 'Sleep,', 'Sports', 'Music', 'Movies', 'Food', 'TV Shows', 'Hobbies', 'Pet']
-    embed = discord.Embed(title="", description=f"Subject successfully changed. New subject is **{subject}**", COLOR=0x646666)
+    embed = discord.Embed(title="", description=f"Subject successfully changed. New subject is **{random.choice(subject)}**", color=0x646666)
     await bot.say(embed=embed)
     
     
