@@ -4,7 +4,7 @@ import asyncio
 import time
 import random
 
-bot = commands.Bot(command_prefix = ";")
+bot = commands.Bot(command_prefix = "!")
 bot.remove_command('help')
 
 @bot.event
@@ -12,7 +12,7 @@ async def on_ready():
     print("Bot successfully booted & online.")
     print("My name is " + bot.user.name)
     print("My ID is " + bot.user.id)
-    await bot.change_presence(game=discord.Game(type=2,name='EvoBot | W.I.P'))
+    await bot.change_presence(game=discord.Game(type=2,name='with subjects'))
 
 @bot.event
 async def on_member_join(member):
@@ -29,6 +29,13 @@ async def echo(ctx, *, args):
     await bot.say(args)
     await bot.delete_message(ctx.message)
 
+@bot.command()
+async def changesubject():
+    subject = ['Minecraft', 'Life', 'Sandwiche's, 'Computers', 'Weather', 'Sleep,', 'Sports', 'Music', 'Movies', 'Food', 'TV Shows', 'Hobbies', 'Pet']
+    embed = discord.Embed(title="", description=f"Subject successfully changed. New subject is **{subject}**", COLOR=0x646666)
+    await bot.say(embed=embed)
+    
+    
 @bot.command()
 async def ping():
         t1=time.perf_counter()
