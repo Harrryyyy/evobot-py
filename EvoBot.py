@@ -29,11 +29,18 @@ async def echo(ctx, *, args):
     await bot.say(args)
     await bot.delete_message(ctx.message)
 
-@bot.command(pass_context=True)
-async def changesubject(ctx, *, args):
-    embed = discord.Embed(title="", description=f"Subject successfully changed. New subject is **{args}**", color=0x646666)
-    await bot.say(embed=embed)
-    
+@bot.command(pass_context=True, aliases=['game', 'presence'])
+async def changesubject(ctx, *args):
+    try:
+        if ctx.message.author.server_permissions.administrator:
+            setgame = ' '.join(args)
+            await bot.change_presence(game=discord.Game(name=setgame))
+            embed = discord.Embed(title="", description=f"Subject changed to **" + setgame + "**", color=0x646666)
+            await bot.say(embed=embed)
+        else:
+            await bot.say(config.err_mesg_permission)
+    except:
+        await bot.say(config.err_mesg)
     
 @bot.command()
 async def ping():
